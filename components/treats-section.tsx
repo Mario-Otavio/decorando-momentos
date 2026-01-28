@@ -1,35 +1,36 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Cake, Cookie, IceCream, CakeSlice } from "lucide-react"
+import { Cake } from "lucide-react"
 
 const treats = [
   {
-    icon: Cookie,
+    image: "/images/treats/cento_salgado.jpg",
     name: "Cento de Salgados",
     description: "Coxinha, bolinha de queijo, risole, empada e muito mais!",
-    price: "A partir de R$ 80",
+    price: "A partir de R$ 100",
     color: "#f6a40e",
   },
   {
-    icon: IceCream,
+    image: "/images/treats/cento_brigadeiro.jpeg",
     name: "Brigadeiros e Beijinhos",
     description: "Cento de docinhos tradicionais feitos com ingredientes de qualidade",
-    price: "A partir de R$ 60",
+    price: "A partir de R$ 100",
     color: "#ee52b1",
   },
   {
-    icon: CakeSlice,
+    image: "/images/treats/copinho_brigadeiro.jpg",
     name: "Brigadeiro no Copo",
     description: "Deliciosos copinhos de brigadeiro gourmet em diversos sabores",
-    price: "A partir de R$ 6/unid.",
+    price: "A partir de R$ 5/unid.",
     color: "#8dd7be",
   },
   {
-    icon: Cake,
+    image: "/images/treats/bolo.jpg",
     name: "Bolos Personalizados",
     description: "Bolos decorados no tema da festa, com massa e recheio à escolha",
     price: "A partir de R$ 120",
@@ -40,10 +41,11 @@ const treats = [
 const cakeFlavors = [
   "Chocolate com morango",
   "Brigadeiro",
-  "Leite Ninho com Nutella",
+  "Dois amores",
   "Doce de leite",
   "Prestígio",
-  "Abacaxi com creme",
+  "Abacaxi com coco",
+  "Chocolate",
 ]
 
 export function TreatsSection() {
@@ -83,12 +85,18 @@ export function TreatsSection() {
               <Card className="h-full group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-border">
                 <CardContent className="p-6 text-center">
                   <motion.div
-                    className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+                    className="w-28 h-28 mx-auto mb-4 rounded-full flex items-center justify-center overflow-hidden"
                     style={{ backgroundColor: `${treat.color}15` }}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <treat.icon className="w-10 h-10" style={{ color: treat.color }} />
+                    <Image
+                      src={treat.image}
+                      alt={treat.name}
+                      width={100}
+                      height={100}
+                      className="w-full h-full object-cover rounded-full"
+                    />
                   </motion.div>
 
                   <h3 className="font-display text-lg font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
@@ -115,7 +123,7 @@ export function TreatsSection() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="font-display text-2xl font-bold text-foreground mb-4">
-                Sabores de Bolo Disponíveis
+                Escolha seu próxima sabor de felicidade
               </h3>
               <p className="text-muted-foreground mb-6">
                 Escolha entre nossos sabores mais amados ou solicite uma combinação especial para
@@ -142,7 +150,7 @@ export function TreatsSection() {
                 </p>
                 <Button
                   asChild
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="bg-primary rounded-full hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105"
                 >
                   <a href="#contato">Encomendar</a>
                 </Button>

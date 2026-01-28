@@ -4,55 +4,52 @@ import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Check, Star } from "lucide-react"
+import { Check, Flame, Star } from "lucide-react"
 
 const packages = [
   {
     name: "Simples",
-    price: "A partir de R$ 250",
+    price: "A partir de R$ 160",
     description: "Ideal para festas menores e íntimas",
     color: "#8dd7be",
     popular: false,
     features: [
       "Painel temático",
-      "Toalha de mesa",
-      "Cortina de fundo",
-      "10 balões temáticos",
-      "Kit de mesa (velas, porta-doces)",
+      "Kit Cilindros",
+      "Tapete",
+      "Kit de Porta-doces",
       "Entrega e retirada inclusas",
+      "Montagem completa no local",
     ],
   },
   {
     name: "Intermediário",
-    price: "A partir de R$ 450",
+    price: "A partir de R$ 300",
     description: "O mais escolhido pelos nossos clientes",
     color: "#ee52b1",
     popular: true,
     features: [
-      "Tudo do pacote Simples",
+      "Painel temático",
+      "Kit Cilindros",
+      "Tapete",
+      "Kit de Porta-doces",
       "Estrutura de balões (arco ou torre)",
-      "20 balões extras decorativos",
-      "Letras 3D do nome",
       "Plaquinhas personalizadas",
-      "Cilindros ou cubos decorativos",
+      "Entrega e retirada inclusas",
       "Montagem completa no local",
     ],
   },
   {
     name: "Completo",
-    price: "A partir de R$ 750",
+    price: "A partir de R$ 480",
     description: "Para quem quer uma festa inesquecível",
     color: "#f6a40e",
     popular: false,
     features: [
       "Tudo do pacote Intermediário",
-      "Arco de balões completo",
-      "Painel de LED ou iluminação especial",
-      "Mesa do bolo decorada completa",
-      "Peças de luxo (espelhos, vasos)",
-      "Tapete temático",
-      "Acessórios especiais do tema",
-      "Suporte exclusivo no dia",
+      "Cento de Doces",
+      "10 balões extras decorativos",
+      "Balão Personalizado com nome do aniversariante",
     ],
   },
 ]
@@ -93,11 +90,23 @@ export function PackagesSection() {
               className={pkg.popular ? "md:-mt-4 md:mb-4" : ""}
             >
               <Card
-                className={`relative h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                  pkg.popular
-                    ? "border-2 border-primary shadow-lg"
-                    : "border-border hover:border-primary/50"
-                }`}
+                className={`relative h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl ${pkg.popular
+                  ? "border-2 shadow-lg"
+                  : "border-border"
+                  }`}
+                style={{
+                  borderColor: pkg.popular ? pkg.color : undefined,
+                } as React.CSSProperties}
+                onMouseEnter={(e) => {
+                  if (!pkg.popular) {
+                    e.currentTarget.style.borderColor = pkg.color;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!pkg.popular) {
+                    e.currentTarget.style.borderColor = '';
+                  }
+                }}
               >
                 {pkg.popular && (
                   <div className="absolute top-0 right-0">
@@ -105,7 +114,7 @@ export function PackagesSection() {
                       className="flex items-center gap-1 px-4 py-1 text-sm font-medium text-white rounded-bl-xl"
                       style={{ backgroundColor: pkg.color }}
                     >
-                      <Star className="w-4 h-4" />
+                      <Flame className="w-4 h-4" />
                       Mais Popular
                     </div>
                   </div>
@@ -154,10 +163,8 @@ export function PackagesSection() {
                     asChild
                     className="w-full cursor-pointer transition-all duration-300 hover:scale-105"
                     style={{
-                      backgroundColor: pkg.popular ? pkg.color : "transparent",
-                      color: pkg.popular ? "#ffffff" : pkg.color,
-                      borderColor: pkg.color,
-                      borderWidth: pkg.popular ? 0 : 2,
+                      backgroundColor: pkg.color,
+                      color: "#ffffff",
                     }}
                   >
                     <a href="#contato">Solicitar Orçamento</a>
@@ -176,7 +183,7 @@ export function PackagesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          * Os valores podem variar de acordo com o tema escolhido e a região de entrega.
+          * Os valores podem variar de acordo com a região de entrega.
           Entre em contato para um orçamento personalizado.
         </motion.p>
       </div>

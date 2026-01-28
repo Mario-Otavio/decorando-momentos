@@ -74,7 +74,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Aluguel de decorações temáticas completas para festas infantis e aniversários. 
+              Aluguel de decorações temáticas completas para festas infantis e aniversários.
               Homem-Aranha, Mundo Bita, Carros e muito mais!
             </motion.p>
 
@@ -87,7 +87,7 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105 text-lg px-8"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105 text-lg px-8 z-10"
               >
                 <a href="#temas">Ver Temas</a>
               </Button>
@@ -95,14 +95,14 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer transition-all duration-300 text-lg px-8 bg-transparent"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer transition-all duration-300 text-lg px-8 bg-transparent z-10"
               >
                 <a href="#contato">Fale Conosco</a>
               </Button>
             </motion.div>
 
             {/* Stats */}
-            <motion.div
+            {/* <motion.div
               className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export function HeroSection() {
                 <p className="font-display text-3xl font-bold text-accent">100%</p>
                 <p className="text-sm text-muted-foreground">Satisfação</p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Visual Element */}
@@ -137,7 +137,7 @@ export function HeroSection() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               />
-              
+
               {/* Inner Content */}
               <div className="absolute inset-8 rounded-full bg-card shadow-2xl flex items-center justify-center overflow-hidden">
                 <div className="text-center p-8">
@@ -162,7 +162,7 @@ export function HeroSection() {
               >
                 <Star className="w-8 h-8 text-primary-foreground" />
               </motion.div>
-              
+
               <motion.div
                 className="absolute top-1/4 -right-4 w-14 h-14 rounded-full bg-secondary shadow-lg flex items-center justify-center"
                 animate={{ x: [0, 10, 0] }}
@@ -170,7 +170,7 @@ export function HeroSection() {
               >
                 <Sparkles className="w-7 h-7 text-secondary-foreground" />
               </motion.div>
-              
+
               <motion.div
                 className="absolute bottom-1/4 -left-4 w-12 h-12 rounded-full bg-accent shadow-lg flex items-center justify-center"
                 animate={{ x: [0, -10, 0] }}
