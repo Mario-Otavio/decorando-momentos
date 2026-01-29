@@ -18,26 +18,28 @@ import {
 } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
 import { Send, MessageCircle, Phone, MapPin, Clock } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const contactInfo = [
   {
-    icon: MessageCircle,
+    icon: FaWhatsapp,
     label: "WhatsApp",
-    value: "(00) 00000-0000",
-    href: "https://wa.me/5500000000000",
+    value: "(65) 99669-7167",
+    href: "", // Será definido dinamicamente no componente
     color: "#25D366",
   },
-  {
-    icon: Phone,
-    label: "Telefone",
-    value: "(00) 0000-0000",
-    href: "tel:+550000000000",
-    color: "#ee52b1",
-  },
+  // {
+  //   icon: Phone,
+  //   label: "Telefone",
+  //   value: "(65) 99669-7167",
+  //   href: "tel:+550000000000",
+  //   color: "#ee52b1",
+  // },
   {
     icon: MapPin,
     label: "Localização",
-    value: "Sua Cidade - Estado",
+    value: "Cuiabá - MT",
     href: "#",
     color: "#f6a40e",
   },
@@ -51,6 +53,11 @@ const contactInfo = [
 ]
 
 export function ContactSection() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+  const mensagemBase = "Gostaria de informações sobre a locação de decorações temáticas"
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(mensagemBase)}`
+
   const [formState, setFormState] = useState({
     name: "",
     phone: "",
@@ -102,49 +109,52 @@ export function ContactSection() {
             Solicite seu orçamento
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Preencha o formulário abaixo ou entre em contato diretamente pelo WhatsApp. Responderemos
+            Entre em contato diretamente pelo WhatsApp. Responderemos
             em até 24 horas!
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Contact Info */}
+        <div className="max-w-xl mx-auto">
+          {/* Contact Info + WhatsApp CTA */}
           <motion.div
-            className="lg:col-span-1"
+            className=""
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.label}
-                  href={info.href}
-                  target={info.href.startsWith("http") ? "_blank" : undefined}
-                  rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border">
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-                        style={{ backgroundColor: `${info.color}20` }}
-                      >
-                        <info.icon className="w-6 h-6" style={{ color: info.color }} />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{info.label}</p>
-                        <p className="font-medium text-card-foreground">{info.value}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.a>
-              ))}
+              {contactInfo.map((info, index) => {
+                const href = info.label === "WhatsApp" ? urlWhatsApp : info.href
+                return (
+                  <motion.a
+                    key={info.label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="block"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                  >
+                    <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border">
+                      <CardContent className="p-4 flex items-center gap-4">
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                          style={{ backgroundColor: `${info.color}20` }}
+                        >
+                          <info.icon className="w-6 h-6" style={{ color: info.color }} />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">{info.label}</p>
+                          <p className="font-medium text-card-foreground">{info.value}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.a>
+                )
+              })}
             </div>
 
             {/* WhatsApp CTA */}
@@ -156,19 +166,19 @@ export function ContactSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <a
-                href="https://wa.me/5500000000000"
+                href={urlWhatsApp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-medium py-4 rounded-xl cursor-pointer transition-all duration-300 hover:scale-105"
+                className="flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-medium py-4 rounded-full cursor-pointer transition-all duration-300 hover:scale-105"
               >
-                <MessageCircle className="w-5 h-5" />
+                <FaWhatsapp className="w-6 h-6" />
                 Chamar no WhatsApp
               </a>
             </motion.div>
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div
+          {/* <motion.div
             className="lg:col-span-2"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -313,7 +323,7 @@ export function ContactSection() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>

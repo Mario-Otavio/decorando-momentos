@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Star, Users, Award } from "lucide-react"
+import { Heart, Star, Users, Rocket } from "lucide-react"
 
 const values = [
   {
@@ -24,10 +24,10 @@ const values = [
     color: "#8dd7be",
   },
   {
-    icon: Award,
-    title: "Experiência comprovada",
-    description: "Mais de 500 festas realizadas com sucesso",
-    color: "#ee52b1",
+    icon: Rocket,
+    title: "Começo promissor",
+    description: "Nossa jornada está só começando, e cada evento é uma nova conquista.",
+    color: "#dc2626",
   },
 ]
 
@@ -61,7 +61,7 @@ export function AboutSection() {
                 infantis.
               </p>
               <p className="text-pretty">
-                Mais do que decorar festas, nosso propósito é <strong className="text-foreground">criar memórias</strong> 
+                Mais do que decorar festas, nosso propósito é <strong className="text-foreground">criar memórias</strong>
                 {" "}que ficarão para sempre no coração das famílias. Ver o sorriso das crianças e a
                 satisfação dos pais é nossa maior recompensa!
               </p>

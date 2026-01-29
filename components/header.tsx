@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, PartyPopper } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const navLinks = [
   { name: "Início", href: "#inicio" },
@@ -17,10 +19,14 @@ const navLinks = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+  const mensagemBase = "gostaria de solicitar um orçamento para uma decoração."
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(mensagemBase)}`
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.a
@@ -30,10 +36,16 @@ export function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <PartyPopper className="w-5 h-5 text-primary-foreground" />
+            <div className="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden">
+              <Image
+                src="/images/treats/Logo-v2.png"
+                alt="Decorando Momentos"
+                width={90}
+                height={90}
+                className="object-contain"
+              />
             </div>
-            <span className="font-display text-xl font-bold text-foreground">
+            <span className="font-display text-primary text-xl font-bold">
               Decorando Momentos
             </span>
           </motion.a>
@@ -65,9 +77,11 @@ export function Header() {
           >
             <Button
               asChild
-              className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105"
+              className="bg-[#25D366] hover:bg-[#20BD5A] text-white cursor-pointer transition-all duration-300 hover:scale-105"
             >
-              <a href="#contato">Solicitar Orçamento</a>
+              <a href={urlWhatsApp} target="_blank" rel="noopener noreferrer">
+                Solicitar Orçamento
+              </a>
             </Button>
           </motion.div>
 

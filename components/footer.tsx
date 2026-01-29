@@ -2,24 +2,26 @@
 
 import { motion } from "framer-motion"
 import { PartyPopper, Instagram, Facebook, MessageCircle, Mail, MapPin, Phone } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const socialLinks = [
-  {
-    name: "Instagram",
-    icon: Instagram,
-    href: "https://instagram.com/decorandomomentosoficial",
-    color: "#E4405F",
-  },
-  {
-    name: "Facebook",
-    icon: Facebook,
-    href: "https://facebook.com/decorandomomentosoficial",
-    color: "#1877F2",
-  },
+  // {
+  //   name: "Instagram",
+  //   icon: Instagram,
+  //   href: "https://instagram.com/decorandomomentosoficial",
+  //   color: "#E4405F",
+  // },
+  // {
+  //   name: "Facebook",
+  //   icon: Facebook,
+  //   href: "https://facebook.com/decorandomomentosoficial",
+  //   color: "#1877F2",
+  // },
   {
     name: "WhatsApp",
-    icon: MessageCircle,
-    href: "https://wa.me/5500000000000",
+    icon: FaWhatsapp,
+    href: "https://wa.me/5565996697167",
     color: "#25D366",
   },
 ]
@@ -34,6 +36,11 @@ const quickLinks = [
 ]
 
 export function Footer() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+  const mensagemBase = "Gostaria de informações sobre a locação de decorações temáticas"
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(mensagemBase)}`
+
   const currentYear = new Date().getFullYear()
 
   return (
@@ -59,19 +66,22 @@ export function Footer() {
               temáticas completas.
             </p>
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer"
-                  whileHover={{ scale: 1.1, backgroundColor: social.color }}
-                  aria-label={social.name}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+              {socialLinks.map((social) => {
+                const href = social.name === "WhatsApp" ? urlWhatsApp : social.href
+                return (
+                  <motion.a
+                    key={social.name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 text-[#25D366] hover:text-white rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer"
+                    whileHover={{ scale: 1.1, backgroundColor: social.color }}
+                    aria-label={social.name}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                )
+              })}
             </div>
           </motion.div>
 
@@ -107,18 +117,20 @@ export function Footer() {
             <h3 className="font-display text-lg font-bold mb-4">Contato</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <FaWhatsapp className="w-5 h-5 text-[#25D366] flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white/70 text-sm">WhatsApp</p>
                   <a
-                    href="https://wa.me/5500000000000"
+                    href={urlWhatsApp}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-primary transition-colors"
                   >
-                    (00) 00000-0000
+                    (65) 99669-7167
                   </a>
                 </div>
               </li>
-              <li className="flex items-start gap-3">
+              {/* <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white/70 text-sm">E-mail</p>
@@ -129,12 +141,12 @@ export function Footer() {
                     contato@decorandomomentosoficial.com.br
                   </a>
                 </div>
-              </li>
+              </li> */}
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white/70 text-sm">Localização</p>
-                  <p>Sua Cidade - Estado</p>
+                  <p>Cuiabá - MT</p>
                 </div>
               </li>
             </ul>
@@ -150,17 +162,17 @@ export function Footer() {
             <h3 className="font-display text-lg font-bold mb-4">Horário de Atendimento</h3>
             <div className="space-y-2 text-white/70">
               <div className="flex justify-between">
-                <span>Segunda a Sexta</span>
+                <span>Segunda a Sábado</span>
                 <span className="text-white">8h às 18h</span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span>Sábado</span>
                 <span className="text-white">8h às 14h</span>
-              </div>
-              <div className="flex justify-between">
+              </div> */}
+              {/* <div className="flex justify-between">
                 <span>Domingo</span>
                 <span className="text-white/50">Fechado</span>
-              </div>
+              </div> */}
             </div>
 
             <div className="mt-6 p-4 bg-white/5 rounded-xl">

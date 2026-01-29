@@ -3,8 +3,14 @@
 import { motion } from "framer-motion"
 import { Sparkles, Star, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 export function HeroSection() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+  const mensagemBase = "Gostaria de informações sobre a locação de decorações temáticas"
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(mensagemBase)}`
+
   return (
     <section
       id="inicio"
@@ -95,9 +101,11 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer transition-all duration-300 text-lg px-8 bg-transparent z-10"
+                className="border-[#25D366] text-[#25D366] hover:bg-[#20BD5A] hover:text-white cursor-pointer transition-all duration-300 text-lg px-8 bg-transparent z-10"
               >
-                <a href="#contato">Fale Conosco</a>
+                <a href={urlWhatsApp} target="_blank" rel="noopener noreferrer">
+                  Fale Conosco
+                </a>
               </Button>
             </motion.div>
 
