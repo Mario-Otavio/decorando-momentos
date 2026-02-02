@@ -1,18 +1,26 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Sparkles } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const categories = [
   { id: "todos", name: "Todos" },
   { id: "herois", name: "Heróis" },
   { id: "desenhos", name: "Desenhos" },
   { id: "filmes", name: "Filmes" },
-  { id: "outros", name: "Outros" },
 ]
 
 const themes = [
@@ -22,7 +30,7 @@ const themes = [
     category: "herois",
     description: "O herói favorito de muitas crianças!",
     popular: true,
-    colors: ["#e23636", "#1e3a8a"],
+    image: "/images/treats/homem-aranha.webp",
   },
   {
     id: 2,
@@ -30,7 +38,7 @@ const themes = [
     category: "desenhos",
     description: "Músicas e cores que encantam os pequenos",
     popular: true,
-    colors: ["#22c55e", "#eab308"],
+    image: "/images/treats/mundo-bita.webp",
   },
   {
     id: 3,
@@ -38,7 +46,7 @@ const themes = [
     category: "filmes",
     description: "Relâmpago McQueen e toda a turma!",
     popular: true,
-    colors: ["#ef4444", "#f97316"],
+    image: "/images/treats/carros.webp",
   },
   {
     id: 4,
@@ -46,7 +54,7 @@ const themes = [
     category: "filmes",
     description: "O reino de Arendelle na sua festa",
     popular: false,
-    colors: ["#06b6d4", "#a855f7"],
+    image: "/images/treats/frozen.webp",
   },
   {
     id: 5,
@@ -54,7 +62,7 @@ const themes = [
     category: "desenhos",
     description: "Clássicos Disney para todas as idades",
     popular: true,
-    colors: ["#ef4444", "#000000"],
+    image: "/images/treats/minnie.webp",
   },
   {
     id: 6,
@@ -62,60 +70,47 @@ const themes = [
     category: "desenhos",
     description: "Nenhum trabalho é grande demais!",
     popular: true,
-    colors: ["#3b82f6", "#ef4444"],
+    image: "/images/treats/patrulha-canina.webp",
   },
   {
     id: 7,
-    name: "Unicórnio",
-    category: "outros",
-    description: "Magia e fantasia em tons pastel",
-    popular: false,
-    colors: ["#ec4899", "#a855f7"],
+    name: "Barbie",
+    category: "filmes",
+    description: "Um mundo cor-de-rosa cheio de magia",
+    popular: true,
+    image: "/images/treats/barbie.webp",
   },
   {
     id: 8,
-    name: "Safari",
-    category: "outros",
-    description: "Aventura selvagem na sua festa",
-    popular: false,
-    colors: ["#84cc16", "#a16207"],
+    name: "Lilo & Stitch",
+    category: "filmes",
+    description: "Ohana significa família!",
+    popular: true,
+    image: "/images/treats/lilo-stitch.webp",
   },
   {
     id: 9,
-    name: "Princesas Disney",
+    name: "Moana",
     category: "filmes",
-    description: "Todas as princesas em um só lugar",
-    popular: true,
-    colors: ["#ec4899", "#eab308"],
+    description: "Aventure-se pelo mar como Moana",
+    popular: false,
+    image: "/images/treats/moana.webp",
   },
   {
     id: 10,
-    name: "Batman",
-    category: "herois",
-    description: "O Cavaleiro das Trevas em ação",
-    popular: false,
-    colors: ["#1e293b", "#eab308"],
-  },
-  {
-    id: 11,
-    name: "Galinha Pintadinha",
-    category: "desenhos",
-    description: "Diversão garantida para os bebês",
+    name: "Pequena Sereia",
+    category: "filmes",
+    description: "Submarino: um mundo de encantos",
     popular: true,
-    colors: ["#3b82f6", "#fbbf24"],
-  },
-  {
-    id: 12,
-    name: "Fazendinha",
-    category: "outros",
-    description: "Animais da fazenda para sua festa",
-    popular: false,
-    colors: ["#22c55e", "#a16207"],
+    image: "/images/treats/pequena-sereia.webp",
   },
 ]
 
 export function CatalogSection() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
   const [activeCategory, setActiveCategory] = useState("todos")
+  const [selectedTheme, setSelectedTheme] = useState<(typeof themes)[number] | null>(null)
 
   const filteredThemes =
     activeCategory === "todos"
@@ -140,8 +135,7 @@ export function CatalogSection() {
             Escolha o tema perfeito para a festa
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Temos mais de 50 temas disponíveis para locação. Confira alguns dos mais populares e
-            encontre o ideal para o seu evento!
+            Confira os temas disponíveis para locação e encontre o ideal para o seu evento!
           </p>
         </motion.div>
 
@@ -158,11 +152,10 @@ export function CatalogSection() {
               key={category.id}
               variant={activeCategory === category.id ? "default" : "outline"}
               onClick={() => setActiveCategory(category.id)}
-              className={`cursor-pointer transition-all duration-300 ${
-                activeCategory === category.id
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "border-border hover:border-primary hover:text-primary"
-              }`}
+              className={`cursor-pointer transition-all duration-300 ${activeCategory === category.id
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "border-border hover:border-primary hover:text-primary"
+                }`}
             >
               {category.name}
             </Button>
@@ -184,36 +177,20 @@ export function CatalogSection() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <Card className="group overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-border bg-card">
-                  <CardContent className="p-0">
+                <Card
+                  className="group overflow-hidden cursor-pointer transition-all p-0! duration-300 hover:shadow-xl hover:-translate-y-2 border-border bg-card"
+                  onClick={() => setSelectedTheme(theme)}
+                >
+                  <CardContent className="p-0!">
                     {/* Theme Visual */}
-                    <div
-                      className="h-40 relative overflow-hidden"
-                      style={{
-                        background: `linear-gradient(135deg, ${theme.colors[0]}20, ${theme.colors[1]}20)`,
-                      }}
-                    >
-                      <div
-                        className="absolute inset-0 flex items-center justify-center"
-                        style={{
-                          background: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]})`,
-                          opacity: 0.1,
-                        }}
+                    <div className="h-56 relative overflow-hidden bg-muted">
+                      <Image
+                        src={theme.image}
+                        alt={theme.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
-                          style={{
-                            background: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]})`,
-                          }}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <span className="text-3xl font-bold text-white">
-                            {theme.name.charAt(0)}
-                          </span>
-                        </motion.div>
-                      </div>
                       {theme.popular && (
                         <div className="absolute top-3 right-3">
                           <Badge className="bg-accent text-accent-foreground">
@@ -229,16 +206,22 @@ export function CatalogSection() {
                       <h3 className="font-display text-lg font-bold text-card-foreground mb-1 group-hover:text-primary transition-colors">
                         {theme.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground">{theme.description}</p>
-                      <div className="mt-3 flex gap-2">
-                        {theme.colors.map((color, i) => (
-                          <div
-                            key={`${theme.id}-color-${i}`}
-                            className="w-5 h-5 rounded-full border-2 border-background shadow-sm"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
-                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">{theme.description}</p>
+                      <a
+                        href={`https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(`Gostaria de reservar o tema ${theme.name}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="block"
+                      >
+                        <Button
+                          size="sm"
+                          className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white cursor-pointer"
+                        >
+                          <FaWhatsapp className="w-5! h-5! mr-2" />
+                          Reservar Tema
+                        </Button>
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
@@ -247,25 +230,35 @@ export function CatalogSection() {
           </AnimatePresence>
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        {/* Lightbox - Visualização da imagem */}
+        <Dialog
+          open={!!selectedTheme}
+          onOpenChange={(open) => !open && setSelectedTheme(null)}
         >
-          <p className="text-muted-foreground mb-4">
-            Não encontrou o tema que procura? Temos muitos outros!
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer transition-all duration-300 hover:scale-105"
+          <DialogContent
+            className="max-w-4xl w-[95vw] p-0 overflow-hidden border-0 bg-transparent shadow-none [&_[data-slot=dialog-close]]:cursor-pointer [&_[data-slot=dialog-close]]:bg-black/60 [&_[data-slot=dialog-close]]:text-white [&_[data-slot=dialog-close]]:hover:bg-black/80 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:p-2"
+            showCloseButton={true}
           >
-            <a href="#contato">Ver Catálogo Completo</a>
-          </Button>
-        </motion.div>
+            {selectedTheme && (
+              <div className="relative rounded-lg overflow-hidden bg-background shadow-2xl pt-8">
+                <div className="relative aspect-[4/3] w-full max-h-[85vh]">
+                  <Image
+                    src={selectedTheme.image}
+                    alt={selectedTheme.name}
+                    fill
+                    className="object-contain"
+                    sizes="95vw"
+                  />
+                </div>
+                <DialogHeader className="p-4 bg-background">
+                  <DialogTitle className="text-center">
+                    {selectedTheme.name}
+                  </DialogTitle>
+                </DialogHeader>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   )
