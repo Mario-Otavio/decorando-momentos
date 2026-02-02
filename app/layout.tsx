@@ -4,20 +4,23 @@ import { Nunito, Fredoka } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const nunito = Nunito({ 
+const nunito = Nunito({
   subsets: ["latin"],
   variable: '--font-nunito'
 });
 
-const fredoka = Fredoka({ 
+const fredoka = Fredoka({
   subsets: ["latin"],
   variable: '--font-fredoka'
 });
 
 export const metadata: Metadata = {
-  title: 'Decorando Momentos | Decoração de Festas Infantis',
+  title: 'Decorando Momentos',
   description: 'Transforme a festa do seu filho em um momento mágico! Aluguel de decorações temáticas para festas infantis e aniversários. Homem-Aranha, Mundo Bita, Carros e muito mais.',
   keywords: 'decoração festa infantil, aluguel decoração aniversário, festa temática, decoração Homem-Aranha, decoração Mundo Bita, festa infantil',
+  icons: {
+    icon: '/images/treats/Logo-v2.png',
+  },
 }
 
 export const viewport: Viewport = {

@@ -58,7 +58,7 @@ const themes = [
   },
   {
     id: 5,
-    name: "Mickey e Minnie",
+    name: "Minnie",
     category: "desenhos",
     description: "Clássicos Disney para todas as idades",
     popular: true,
@@ -84,7 +84,7 @@ const themes = [
     id: 8,
     name: "Lilo & Stitch",
     category: "filmes",
-    description: "Ohana significa família!",
+    description: "Ohana quer dizer família!",
     popular: true,
     image: "/images/treats/lilo-stitch.webp",
   },
