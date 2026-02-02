@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Check, Flame, Star } from "lucide-react"
+import { Check, Flame, Gift } from "lucide-react"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const packages = [
   {
@@ -55,6 +56,9 @@ const packages = [
 ]
 
 export function PackagesSection() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+
   return (
     <section id="pacotes" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -126,9 +130,11 @@ export function PackagesSection() {
                     style={{ backgroundColor: `${pkg.color}20` }}
                   >
                     <div
-                      className="w-10 h-10 rounded-full"
+                      className="w-10 h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: pkg.color }}
-                    />
+                    >
+                      <Gift className="w-5 h-5 text-white" />
+                    </div>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-card-foreground">
                     {pkg.name}
@@ -167,7 +173,13 @@ export function PackagesSection() {
                       color: "#ffffff",
                     }}
                   >
-                    <a href="#contato">Solicitar Orçamento</a>
+                    <a
+                      href={`https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp(`Gostaria de solicitar orçamento do pacote ${pkg.name}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Solicitar Orçamento
+                    </a>
                   </Button>
                 </CardFooter>
               </Card>

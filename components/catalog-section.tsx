@@ -240,7 +240,7 @@ export function CatalogSection() {
             showCloseButton={true}
           >
             {selectedTheme && (
-              <div className="relative rounded-lg overflow-hidden bg-background shadow-2xl pt-8">
+              <div className="relative rounded-lg overflow-hidden bg-white shadow-2xl pt-8">
                 <div className="relative aspect-[4/3] w-full max-h-[85vh]">
                   <Image
                     src={selectedTheme.image}
@@ -250,7 +250,7 @@ export function CatalogSection() {
                     sizes="95vw"
                   />
                 </div>
-                <DialogHeader className="p-4 bg-background">
+                <DialogHeader className="p-4 bg-white">
                   <DialogTitle className="text-center">
                     {selectedTheme.name}
                   </DialogTitle>

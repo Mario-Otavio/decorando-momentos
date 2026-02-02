@@ -117,14 +117,14 @@ export function Footer() {
             <h3 className="font-display text-lg font-bold mb-4">Contato</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <FaWhatsapp className="w-5 h-5 text-[#25D366] flex-shrink-0 mt-0.5" />
+                <FaWhatsapp className="w-5 h-5 text-[#25D366] flex shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white/70 text-sm">WhatsApp</p>
                   <a
                     href={urlWhatsApp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
+                    className="hover:text-[#25D366] transition-colors"
                   >
                     (65) 99669-7167
                   </a>

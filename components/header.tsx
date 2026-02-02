@@ -122,9 +122,9 @@ export function Header() {
                 ))}
                 <Button
                   asChild
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer w-full mt-2"
+                  className="bg-[#25D366] hover:bg-[#20BD5A] text-primary-foreground cursor-pointer w-full mt-2"
                 >
-                  <a href="#contato" onClick={() => setIsOpen(false)}>
+                  <a href={urlWhatsApp} target="_blank" onClick={() => setIsOpen(false)}>
                     Solicitar Orçamento
                   </a>
                 </Button>

@@ -141,7 +141,7 @@ export function ContactSection() {
                     <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border">
                       <CardContent className="p-4 flex items-center gap-4">
                         <div
-                          className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                          className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
                           style={{ backgroundColor: `${info.color}20` }}
                         >
                           <info.icon className="w-6 h-6" style={{ color: info.color }} />

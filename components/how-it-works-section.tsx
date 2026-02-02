@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, Package, Truck, PartyPopper } from "lucide-react"
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa"
+import { useMensagemSaudacao } from "@/hooks/mensagem-saudacao"
 
 const steps = [
   {
@@ -11,7 +12,7 @@ const steps = [
     title: "Entre em Contato",
     description:
       "Fale conosco pelo WhatsApp. Conte sobre a data, tema desejado e local da festa.",
-    color: "#ee52b1",
+    color: "#25D366",
   },
   {
     icon: Package,
@@ -37,6 +38,9 @@ const steps = [
 ]
 
 export function HowItWorksSection() {
+  const { obterMensagemWhatsApp } = useMensagemSaudacao()
+  const numeroWhatsApp = "5565996697167"
+
   return (
     <section id="como-funciona" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -122,7 +126,7 @@ export function HowItWorksSection() {
             Nossa equipe está pronta para ajudar você a encontrar a decoração perfeita!
           </p>
           <a
-            href="https://wa.me/5565996697167?text=Olá, gostaria de saber mais sobre a locação de decorações temáticas."
+            href={`https://wa.me/${numeroWhatsApp}?text=${obterMensagemWhatsApp("Gostaria de saber mais sobre a locação de decorações temáticas.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-medium px-6 py-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-105"
