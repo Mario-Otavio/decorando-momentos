@@ -123,7 +123,7 @@ export function TreatsSection() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="font-display text-2xl font-bold text-foreground mb-4">
-                Escolha seu próxima sabor de felicidade
+                Seu próximo sabor de felicidade espera por você
               </h3>
               <p className="text-muted-foreground mb-6">
                 Escolha entre nossos sabores mais amados ou solicite uma combinação especial para
